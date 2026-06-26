@@ -1,6 +1,4 @@
 {
-  "name": "stest",
-  "slug": "stest",
   "baseURL": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home",
   "browser": "chromium",
   "headless": true,

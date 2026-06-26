@@ -1,0 +1,153 @@
+{
+  "id": "multiple-planned-tasks-start-one",
+  "testPlanId": "c3cbc8a9-8c9b-43ad-be85-854fd8fb43f5",
+  "requirementId": "44737615-82a9-4577-993b-56f86ecda363",
+  "suiteName": "Start Project Task — Salesforce PSA",
+  "case": {
+    "id": "multiple-planned-tasks-start-one",
+    "title": "Multiple Planned tasks: start one and verify others remain Planned",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input visible",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Search for a project with multiple Planned tasks",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']",
+        "value": "PSA TEST PROJECT - MULTIPLE PLANNED TASKS"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results panel visible",
+        "locatorHint": ".searchDialog, [role='listbox']"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Open the project from results",
+        "locatorHint": "a:has-text('PSA TEST PROJECT - MULTIPLE PLANNED TASKS')"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Project Detail page for selected project",
+        "locatorHint": "h1:has-text('PSA TEST PROJECT - MULTIPLE PLANNED TASKS')"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Open Related tab",
+        "locatorHint": "[role='tab']:has-text('Related')"
+      },
+      {
+        "id": "s8",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks related list shown",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')), [data-label='Project Tasks']"
+      },
+      {
+        "id": "s9",
+        "action": "tap",
+        "targetDescription": "Open Project Tasks via View All",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')) a:has-text('View All'), [data-label='Project Tasks'] a:has-text('View All')"
+      },
+      {
+        "id": "s10",
+        "action": "waitForVisible",
+        "targetDescription": "Tasks list/table area",
+        "locatorHint": ".slds-table, [role='grid']"
+      },
+      {
+        "id": "s11",
+        "action": "assertCountGreaterThan",
+        "targetDescription": "Verify at least two tasks have status Planned",
+        "locatorHint": "tbody tr:has(td:has-text('Planned'))"
+      },
+      {
+        "id": "s12",
+        "action": "tap",
+        "targetDescription": "Open first Planned task",
+        "locatorHint": "tbody tr:has(td:has-text('Planned')) a"
+      },
+      {
+        "id": "s13",
+        "action": "waitForVisible",
+        "targetDescription": "Project Task Detail page",
+        "locatorHint": "h1.slds-page-header__title, h1[title]"
+      },
+      {
+        "id": "s14",
+        "action": "assertVisible",
+        "targetDescription": "Start button visible",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s15",
+        "action": "tap",
+        "targetDescription": "Click Start",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s16",
+        "action": "waitForVisible",
+        "targetDescription": "Status updates to Started",
+        "locatorHint": "[data-field='Status'] :text('Started'), .slds-output-field:has-text('Started'), lightning-output-field span:has-text('Started')"
+      },
+      {
+        "id": "s17",
+        "action": "back",
+        "targetDescription": "Return to Project Tasks list"
+      },
+      {
+        "id": "s18",
+        "action": "waitForVisible",
+        "targetDescription": "Tasks list/table area",
+        "locatorHint": ".slds-table, [role='grid']"
+      },
+      {
+        "id": "s19",
+        "action": "assertCountGreaterThan",
+        "targetDescription": "At least one Planned task remains",
+        "locatorHint": "tbody tr:has(td:has-text('Planned'))"
+      },
+      {
+        "id": "s20",
+        "action": "tap",
+        "targetDescription": "Open another Planned task (independent)",
+        "locatorHint": "tbody tr:has(td:has-text('Planned')) a"
+      },
+      {
+        "id": "s21",
+        "action": "waitForVisible",
+        "targetDescription": "Second Project Task Detail page",
+        "locatorHint": "h1.slds-page-header__title, h1[title]"
+      },
+      {
+        "id": "s22",
+        "action": "assertVisible",
+        "targetDescription": "Start button is still available for this Planned task",
+        "locatorHint": "button:has-text('Start')"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

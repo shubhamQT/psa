@@ -1,0 +1,65 @@
+{
+  "id": "search-case-insensitive-project",
+  "testPlanId": "c3cbc8a9-8c9b-43ad-be85-854fd8fb43f5",
+  "requirementId": "44737615-82a9-4577-993b-56f86ecda363",
+  "suiteName": "Start Project Task — Salesforce PSA",
+  "case": {
+    "id": "search-case-insensitive-project",
+    "title": "Search is case-insensitive for project name",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input visible",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Enter project name in lowercase",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']",
+        "value": "360 health and commu - q-383470 - ready fixed fee implementation"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results panel visible",
+        "locatorHint": ".searchDialog, [role='listbox']"
+      },
+      {
+        "id": "s5",
+        "action": "assertContainsText",
+        "targetDescription": "Results contain the matching project (original case)",
+        "locatorHint": ".searchDialog, [role='listbox']",
+        "assertion": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Open matching project from results",
+        "locatorHint": "a:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s7",
+        "action": "waitForVisible",
+        "targetDescription": "Project Detail displays selected project",
+        "locatorHint": "h1:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

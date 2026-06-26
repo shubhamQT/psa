@@ -1,0 +1,137 @@
+{
+  "id": "start-planned-task-success",
+  "testPlanId": "c3cbc8a9-8c9b-43ad-be85-854fd8fb43f5",
+  "requirementId": "44737615-82a9-4577-993b-56f86ecda363",
+  "suiteName": "Start Project Task — Salesforce PSA",
+  "case": {
+    "id": "start-planned-task-success",
+    "title": "Start a Planned Project Task and verify status updates to Started",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input visible on Home page",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']"
+      },
+      {
+        "id": "s3",
+        "action": "assertVisible",
+        "targetDescription": "Assert global search is present",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']"
+      },
+      {
+        "id": "s4",
+        "action": "fill",
+        "targetDescription": "Enter project name in global search",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']",
+        "value": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+      },
+      {
+        "id": "s5",
+        "action": "waitForVisible",
+        "targetDescription": "Wait for search results panel",
+        "locatorHint": ".searchDialog, [role='listbox']"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Select matching project from results",
+        "locatorHint": "a:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s7",
+        "action": "waitForVisible",
+        "targetDescription": "Project Detail header displays selected project",
+        "locatorHint": "h1:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s8",
+        "action": "tap",
+        "targetDescription": "Open Related tab",
+        "locatorHint": "[role='tab']:has-text('Related')"
+      },
+      {
+        "id": "s9",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks related list is visible",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')), [data-label='Project Tasks']"
+      },
+      {
+        "id": "s10",
+        "action": "tap",
+        "targetDescription": "Open Project Tasks list via View All",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')) a:has-text('View All'), [data-label='Project Tasks'] a:has-text('View All')"
+      },
+      {
+        "id": "s11",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks page/table is displayed",
+        "locatorHint": ".slds-table, [role='grid']"
+      },
+      {
+        "id": "s12",
+        "action": "assertVisible",
+        "targetDescription": "Assert tasks list is visible",
+        "locatorHint": ".slds-table, [role='grid']"
+      },
+      {
+        "id": "s13",
+        "action": "assertCountGreaterThan",
+        "targetDescription": "Ensure at least one Planned task exists",
+        "locatorHint": "tbody tr:has(td:has-text('Planned'))"
+      },
+      {
+        "id": "s14",
+        "action": "tap",
+        "targetDescription": "Open first task with status Planned",
+        "locatorHint": "tbody tr:has(td:has-text('Planned')) a"
+      },
+      {
+        "id": "s15",
+        "action": "waitForVisible",
+        "targetDescription": "Project Task Detail page header",
+        "locatorHint": "h1.slds-page-header__title, h1[title]"
+      },
+      {
+        "id": "s16",
+        "action": "assertVisible",
+        "targetDescription": "Start button is visible on Planned task",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s17",
+        "action": "tap",
+        "targetDescription": "Click Start to begin the task",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s18",
+        "action": "waitForVisible",
+        "targetDescription": "Wait for status to update to Started",
+        "locatorHint": "[data-field='Status'] :text('Started'), .slds-output-field:has-text('Started'), lightning-output-field span:has-text('Started')"
+      },
+      {
+        "id": "s19",
+        "action": "assertContainsText",
+        "targetDescription": "Verify task status is Started on detail page",
+        "locatorHint": "[data-field='Status'], .slds-output-field, lightning-output-field",
+        "assertion": "Started"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

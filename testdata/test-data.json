@@ -1,1 +1,20 @@
-{}
+{
+  "startAPlannedProjectTaskAndVerifyStatusUpdatesToStarted": {
+    "enterProjectNameInGlobalSearch": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+  },
+  "searchIsCaseInsensitiveForProjectName": {
+    "enterProjectNameInLowercase": "360 health and commu - q-383470 - ready fixed fee implementation"
+  },
+  "invalidProjectSearchReturnsNoMatchingProjectsFound": {
+    "enterInvalidProjectName": "ZZZ-NON-EXISTENT-PROJECT-XYZ-999"
+  },
+  "projectExistsButContainsNoProjectTasks": {
+    "searchForAProjectKnownToHaveNoTasks": "PSA TEST PROJECT - NO TASKS"
+  },
+  "projectHasTasksButNoneWithStatusPlanned": {
+    "searchForAProjectWithTasksButNonePlanned": "PSA TEST PROJECT - NO PLANNED TASKS"
+  },
+  "multiplePlannedTasksStartOneAndVerifyOthersRemainPlanned": {
+    "searchForAProjectWithMultiplePlannedTasks": "PSA TEST PROJECT - MULTIPLE PLANNED TASKS"
+  }
+}

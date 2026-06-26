@@ -1,0 +1,89 @@
+{
+  "id": "project-has-no-tasks",
+  "testPlanId": "c3cbc8a9-8c9b-43ad-be85-854fd8fb43f5",
+  "requirementId": "44737615-82a9-4577-993b-56f86ecda363",
+  "suiteName": "Start Project Task — Salesforce PSA",
+  "case": {
+    "id": "project-has-no-tasks",
+    "title": "Project exists but contains no Project Tasks",
+    "priority": "P2",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input visible",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Search for a project known to have no tasks",
+        "locatorHint": "[placeholder='Search...'], [aria-label='Search']",
+        "value": "PSA TEST PROJECT - NO TASKS"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results panel visible",
+        "locatorHint": ".searchDialog, [role='listbox']"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Open the project from results",
+        "locatorHint": "a:has-text('PSA TEST PROJECT - NO TASKS')"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Project Detail page for selected project",
+        "locatorHint": "h1:has-text('PSA TEST PROJECT - NO TASKS')"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Open Related tab",
+        "locatorHint": "[role='tab']:has-text('Related')"
+      },
+      {
+        "id": "s8",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks related list shown",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')), [data-label='Project Tasks']"
+      },
+      {
+        "id": "s9",
+        "action": "tap",
+        "targetDescription": "Open Project Tasks via View All",
+        "locatorHint": "article:has(h2:has-text('Project Tasks')) a:has-text('View All'), [data-label='Project Tasks'] a:has-text('View All')"
+      },
+      {
+        "id": "s10",
+        "action": "waitForVisible",
+        "targetDescription": "Tasks list/table area",
+        "locatorHint": ".slds-table, [role='grid']"
+      },
+      {
+        "id": "s11",
+        "action": "assertContainsText",
+        "targetDescription": "Assert no tasks message displayed",
+        "locatorHint": ".slds-card__body, .slds-grid, [role='region']",
+        "assertion": "No items to display"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}
