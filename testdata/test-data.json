@@ -1,1 +1,23 @@
-{}
+{
+  "startAPlannedProjectTaskAndVerifyStatusUpdatesToStarted": {
+    "enterProjectNameInGlobalSearch": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+  },
+  "searchForProjectIsCaseInsensitiveAndOpensProjectDetail": {
+    "enterProjectNameInLowercase": "360 health and commu - q-383470 - ready fixed fee implementation"
+  },
+  "invalidProjectNameShowsNoMatchingProjectsFound": {
+    "enterInvalidProjectNameInGlobalSearch": "ZZZ-NONEXISTENT-PROJECT-###"
+  },
+  "projectWithNoProjectTasksShowsAppropriateMessage": {
+    "enterQaNoTasksProjectInGlobalSearch": "Administrative"
+  },
+  "projectTasksPageShowsNoPlannedTasksWhenNoneExist": {
+    "enterQaNoPlannedTasksProjectInGlobalSearch": "QA - No Planned Tasks Project"
+  },
+  "startingOneOfMultiplePlannedTasksUpdatesOnlyTheSelectedTask": {
+    "enterQaMultiplePlannedTasksProjectInGlobalSearch": "902476 Canada Inc. - Q-404305 - Ready Fixed Fee Implementation"
+  },
+  "startButtonIsNotAvailableWhenTaskStatusIsNotPlanned": {
+    "enterQaInProgressTaskProjectInGlobalSearch": "QA - In Progress Task Project"
+  }
+}

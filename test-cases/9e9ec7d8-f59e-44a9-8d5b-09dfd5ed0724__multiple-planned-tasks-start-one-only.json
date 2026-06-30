@@ -1,0 +1,149 @@
+{
+  "id": "multiple-planned-tasks-start-one-only",
+  "testPlanId": "9e9ec7d8-f59e-44a9-8d5b-09dfd5ed0724",
+  "requirementId": "9c8be9e7-f156-4f22-82ae-658db10b84f4",
+  "suiteName": "Start Project Task - Salesforce PSA",
+  "case": {
+    "id": "multiple-planned-tasks-start-one-only",
+    "title": "Starting one of multiple Planned tasks updates only the selected task",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [
+      "Test data: Project 'QA - Multiple Planned Tasks Project' exists.",
+      "Project has at least two tasks in Planned status named 'Task A Planned' and 'Task B Planned'."
+    ],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input is visible on Home page",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "10000"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Enter 'QA - Multiple Planned Tasks Project' in global search",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "QA - Multiple Planned Tasks Project"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results dropdown list is visible",
+        "locatorHint": "ul[role='listbox']",
+        "value": "10000"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Select 'QA - Multiple Planned Tasks Project' from results",
+        "locatorHint": "ul[role='listbox'] li:has-text('QA - Multiple Planned Tasks Project')"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Project detail header is visible",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "value": "10000"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Open Project Tasks related list",
+        "locatorHint": "a[title='Project Tasks'], a:has-text('Project Tasks')"
+      },
+      {
+        "id": "s8",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks list is visible",
+        "locatorHint": "div[role='region'][aria-label='Project Tasks'], h2:has-text('Project Tasks')",
+        "value": "10000"
+      },
+      {
+        "id": "s9",
+        "action": "assertCountGreaterThan",
+        "targetDescription": "Verify at least two Planned tasks exist",
+        "locatorHint": "table tr:has(td:has-text('Planned'))"
+      },
+      {
+        "id": "s10",
+        "action": "tap",
+        "targetDescription": "Open 'Task A Planned' from list",
+        "locatorHint": "table tr:has(td:has-text('Task A Planned')) a[role='link'], table tr:has(td:has-text('Task A Planned')) a"
+      },
+      {
+        "id": "s11",
+        "action": "waitForVisible",
+        "targetDescription": "Task A detail header is visible",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "value": "10000"
+      },
+      {
+        "id": "s12",
+        "action": "assertContainsText",
+        "targetDescription": "Task A status is Planned",
+        "locatorHint": ".slds-form-element:has(label:has-text('Status')) lightning-formatted-text, .slds-form-element:has(label:has-text('Status')) .slds-form-element__static",
+        "assertion": "Planned"
+      },
+      {
+        "id": "s13",
+        "action": "tap",
+        "targetDescription": "Click Start on Task A",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s14",
+        "action": "waitForVisible",
+        "targetDescription": "Task A status updates to Started",
+        "locatorHint": ".slds-form-element:has(label:has-text('Status')) :text('Started')",
+        "value": "10000"
+      },
+      {
+        "id": "s15",
+        "action": "assertContainsText",
+        "targetDescription": "Verify Task A status is Started on detail",
+        "locatorHint": ".slds-form-element:has(label:has-text('Status')) lightning-formatted-text, .slds-form-element:has(label:has-text('Status')) .slds-form-element__static",
+        "assertion": "Started"
+      },
+      {
+        "id": "s16",
+        "action": "back",
+        "targetDescription": "Navigate back to Project Tasks list"
+      },
+      {
+        "id": "s17",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks list is visible after back",
+        "locatorHint": "div[role='region'][aria-label='Project Tasks'], h2:has-text('Project Tasks')",
+        "value": "10000"
+      },
+      {
+        "id": "s18",
+        "action": "assertContainsText",
+        "targetDescription": "Task A shows status Started in list",
+        "locatorHint": "table tr:has(td:has-text('Task A Planned')) td:has-text('Started')",
+        "assertion": "Started"
+      },
+      {
+        "id": "s19",
+        "action": "assertContainsText",
+        "targetDescription": "Task B remains in Planned status",
+        "locatorHint": "table tr:has(td:has-text('Task B Planned')) td:has-text('Planned')",
+        "assertion": "Planned"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

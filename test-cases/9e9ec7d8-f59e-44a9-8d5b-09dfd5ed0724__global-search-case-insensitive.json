@@ -1,0 +1,74 @@
+{
+  "id": "global-search-case-insensitive",
+  "testPlanId": "9e9ec7d8-f59e-44a9-8d5b-09dfd5ed0724",
+  "requirementId": "9c8be9e7-f156-4f22-82ae-658db10b84f4",
+  "suiteName": "Start Project Task - Salesforce PSA",
+  "case": {
+    "id": "global-search-case-insensitive",
+    "title": "Search for project is case-insensitive and opens project detail",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input is visible on Home page",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "10000"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Enter project name in lowercase",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "360 health and commu - q-383470 - ready fixed fee implementation"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results dropdown list is visible",
+        "locatorHint": "ul[role='listbox']",
+        "value": "10000"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "Matching project appears in results despite casing",
+        "locatorHint": "ul[role='listbox'] li:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s6",
+        "action": "tap",
+        "targetDescription": "Select the matching project result",
+        "locatorHint": "ul[role='listbox'] li:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s7",
+        "action": "waitForVisible",
+        "targetDescription": "Project detail header is visible",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "value": "10000"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Project detail displays correct project name",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "assertion": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

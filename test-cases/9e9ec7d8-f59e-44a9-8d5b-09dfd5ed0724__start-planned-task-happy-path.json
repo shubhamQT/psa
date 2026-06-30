@@ -1,0 +1,139 @@
+{
+  "id": "start-planned-task-happy-path",
+  "testPlanId": "9e9ec7d8-f59e-44a9-8d5b-09dfd5ed0724",
+  "requirementId": "9c8be9e7-f156-4f22-82ae-658db10b84f4",
+  "suiteName": "Start Project Task - Salesforce PSA",
+  "case": {
+    "id": "start-planned-task-happy-path",
+    "title": "Start a Planned Project Task and verify status updates to Started",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input is visible on Home page",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "10000"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Enter project name in global search",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results dropdown list is visible",
+        "locatorHint": "ul[role='listbox']",
+        "value": "10000"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Select matching project from search results",
+        "locatorHint": "ul[role='listbox'] li:has-text('360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation')"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Project detail header is visible",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "value": "10000"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Project detail displays selected project name",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "assertion": "360 HEALTH AND COMMU - Q-383470 - Ready Fixed Fee Implementation"
+      },
+      {
+        "id": "s8",
+        "action": "assertVisible",
+        "targetDescription": "Project Tasks related link is visible",
+        "locatorHint": "a[title='Project Tasks'], a:has-text('Project Tasks')"
+      },
+      {
+        "id": "s9",
+        "action": "tap",
+        "targetDescription": "Open Project Tasks related list",
+        "locatorHint": "a[title='Project Tasks'], a:has-text('Project Tasks')"
+      },
+      {
+        "id": "s10",
+        "action": "waitForVisible",
+        "targetDescription": "Project Tasks page/related list is visible",
+        "locatorHint": "h2:has-text('Project Tasks'), div[role='region'][aria-label='Project Tasks']",
+        "value": "10000"
+      },
+      {
+        "id": "s11",
+        "action": "assertCountGreaterThan",
+        "targetDescription": "At least one task has status Planned",
+        "locatorHint": "table tr:has(td:has-text('Planned'))"
+      },
+      {
+        "id": "s12",
+        "action": "tap",
+        "targetDescription": "Open first Planned task from list",
+        "locatorHint": "table tr:has(td:has-text('Planned')) a[role='link'], table tr:has(td:has-text('Planned')) a"
+      },
+      {
+        "id": "s13",
+        "action": "waitForVisible",
+        "targetDescription": "Project Task detail header is visible",
+        "locatorHint": "h1.slds-page-header__title, lightning-formatted-text.recordTitle",
+        "value": "10000"
+      },
+      {
+        "id": "s14",
+        "action": "assertContainsText",
+        "targetDescription": "Task status is Planned on detail page",
+        "locatorHint": "[data-field='Status'], .slds-form-element:has(label:has-text('Status')) .slds-form-element__static, .slds-form-element:has(label:has-text('Status')) lightning-formatted-text",
+        "assertion": "Planned"
+      },
+      {
+        "id": "s15",
+        "action": "assertVisible",
+        "targetDescription": "Start button is visible for Planned task",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s16",
+        "action": "tap",
+        "targetDescription": "Click Start to begin task",
+        "locatorHint": "button:has-text('Start')"
+      },
+      {
+        "id": "s17",
+        "action": "waitForVisible",
+        "targetDescription": "Status value updates to Started",
+        "locatorHint": ".slds-form-element:has(label:has-text('Status')) :text('Started')",
+        "value": "10000"
+      },
+      {
+        "id": "s18",
+        "action": "assertContainsText",
+        "targetDescription": "Verify status is Started on detail page",
+        "locatorHint": "[data-field='Status'], .slds-form-element:has(label:has-text('Status')) .slds-form-element__static, .slds-form-element:has(label:has-text('Status')) lightning-formatted-text",
+        "assertion": "Started"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

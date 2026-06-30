@@ -1,7 +1,7 @@
 {
-  "name": "stest",
-  "slug": "stest",
   "baseURL": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home",
+  "username": "admin@example.com",
+  "password": "changeme",
   "browser": "chromium",
   "headless": true,
   "timeout": 30000,

@@ -1,0 +1,54 @@
+{
+  "id": "search-invalid-project-name",
+  "testPlanId": "9e9ec7d8-f59e-44a9-8d5b-09dfd5ed0724",
+  "requirementId": "9c8be9e7-f156-4f22-82ae-658db10b84f4",
+  "suiteName": "Start Project Task - Salesforce PSA",
+  "case": {
+    "id": "search-invalid-project-name",
+    "title": "Invalid project name shows no matching projects found",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Salesforce PSA Home",
+        "value": "https://ukgsf--stest.sandbox.lightning.force.com/lightning/page/home"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Global search input is visible on Home page",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "10000"
+      },
+      {
+        "id": "s3",
+        "action": "fill",
+        "targetDescription": "Enter invalid project name in global search",
+        "locatorHint": "input[placeholder='Search...']",
+        "value": "ZZZ-NONEXISTENT-PROJECT-###"
+      },
+      {
+        "id": "s4",
+        "action": "waitForVisible",
+        "targetDescription": "Search results dropdown list is visible",
+        "locatorHint": "ul[role='listbox']",
+        "value": "10000"
+      },
+      {
+        "id": "s5",
+        "action": "assertVisible",
+        "targetDescription": "No results message is displayed",
+        "locatorHint": "ul[role='listbox'] li:has-text('No results'), div:has-text('No matching projects found')"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

@@ -43,6 +43,8 @@ permissions:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    env:
+      AUTONIX_REGISTRY_TOKEN: ${{ secrets.AUTONIX_REGISTRY_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,8 +54,13 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Configure Autonix registry
+        run: |
+          npm config set @autonix:registry https://artifact-keeper.qtsolvdev.com/npm/qa-automation-libraries/
+          npm config set "//artifact-keeper.qtsolvdev.com/npm/qa-automation-libraries/:_authToken" "$AUTONIX_REGISTRY_TOKEN"
+
       - name: Install dependencies
-        run: npm install
+        run: if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
       - name: Write auth state
         if: ${{ inputs.auth_state_url != '' && inputs.auth_state_filename != '' }}
