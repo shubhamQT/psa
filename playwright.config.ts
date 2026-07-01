@@ -30,6 +30,7 @@ function browserDevice(b: "chromium" | "firefox" | "webkit") {
 
 export default defineConfig({
   testDir: "./tests",
+  tsconfig: "./tsconfig.json",
   timeout:       Number(env.timeout       ?? 30000),
   retries:       Number(env.retries        ?? 0),
   fullyParallel: Boolean(env.fullyParallel ?? false),
