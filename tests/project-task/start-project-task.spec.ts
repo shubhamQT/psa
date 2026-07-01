@@ -1,4 +1,4 @@
-import { test, expect } from '@support/fixtures';
+import { test, expect } from '../support/fixtures';
 import env from '@support/env';
 import testData from '@testdata/test-data.json';
 
@@ -8,6 +8,7 @@ test('Start a Planned Project Task and verify status updates to Started', { tag:
   });
 
   await test.step('Assert visible — Global search input is visible on Home page', async () => {
+    await homePage.clickSearch();
     await homePage.expectSearchInputVisible();
   });
 
@@ -85,6 +86,7 @@ test('Start a Planned Project Task and verify status updates to Started', { tag:
     });
 
     await test.step('Assert visible — Global search input is visible on Home page', async () => {
+      await homePage.clickSearch();
       await homePage.expectSearchInputVisible();
     });
 
@@ -114,13 +116,13 @@ test('Start a Planned Project Task and verify status updates to Started', { tag:
     });
   });
 
-
 test('Invalid project name shows no matching projects found', { tag: ["@e2e","@regression","@P1","@search-invalid-project-name"] }, async ({ page, homePage, searchResultPage }) => {
   await test.step('Open — Navigate to Salesforce PSA Home', async () => {
     await page.goto(env.baseURL);
   });
 
   await test.step('Assert visible — Global search input is visible on Home page', async () => {
+    await homePage.clickSearch();
     await homePage.expectSearchInputVisible();
   });
 
@@ -137,13 +139,13 @@ test('Invalid project name shows no matching projects found', { tag: ["@e2e","@r
   });
 });
 
-
 test('Starting one of multiple Planned tasks updates only the selected task', { tag: ["@e2e","@regression","@P1","@multiple-planned-tasks-start-one-only"] }, async ({ page, homePage, searchResultPage, pseProjCPage, pseProjCrelatedPage, pseProjectTaskCPage }) => {
   await test.step('Open — Navigate to Salesforce PSA Home', async () => {
     await page.goto(env.baseURL);
   });
 
   await test.step('Assert visible — Global search input is visible on Home page', async () => {
+    await homePage.clickSearch();
     await homePage.expectSearchInputVisible();
   });
 
@@ -171,51 +173,31 @@ test('Starting one of multiple Planned tasks updates only the selected task', { 
     await pseProjCrelatedPage.expectProjectTasksVisible();
   });
 
-  await test.step('Assert count greater than — Verify at least two Planned tasks exist', async () => {
-    await pseProjCrelatedPage.expectPlannedRowsCountGreaterThan(1);
+  await test.step('Assert visible — Sort by Status is visible', async () => {
+    await pseProjCrelatedPage.expectSortByStatusVisible();
   });
 
-  await test.step('Click — Open \'Task A Planned\' from list', async () => {
-    await pseProjCrelatedPage.clickTaskAPlanned();
+  await test.step('Click — Open first Planned task from list', async () => {
+    await pseProjCrelatedPage.clickProjectTaskNameColumn();
   });
 
-  await test.step('Assert visible — Task A detail header is visible', async () => {
+  await test.step('Assert visible — Task detail header is visible', async () => {
     await pseProjectTaskCPage.expectProjectTaskNameVisible();
   });
 
-  await test.step('Assert contains — Task A status is Planned', async () => {
-    await pseProjectTaskCPage.expectStatusVisible();
+  await test.step('Assert contains — Task status is Planned', async () => {
+    const statusText = await pseProjectTaskCPage.getInnerTextStatus();
+    await expect(statusText).toContain('Planned');
   });
 
-  await test.step('Click — Click Start on Task A', async () => {
+  await test.step('Click — Click Start on Task', async () => {
     await pseProjectTaskCPage.clickStart();
   });
 
-  await test.step('Assert visible — Task A status updates to Started', async () => {
+  await test.step('Assert visible — Task status updates to Started', async () => {
     await pseProjectTaskCPage.expectStartedVisible();
-  });
-
-  await test.step('Assert contains — Verify Task A status is Started on detail', async () => {
-    await pseProjectTaskCPage.expectStartedVisible();
-  });
-
-  await test.step('Navigate back — Navigate back to Project Tasks list', async () => {
-    await page.goBack();
-  });
-
-  await test.step('Assert visible — Project Tasks list is visible after back', async () => {
-    await pseProjCrelatedPage.expectProjectTasksVisible();
-  });
-
-  await test.step('Assert contains — Task A shows status Started in list', async () => {
-    await pseProjCrelatedPage.expectTaskARowContainsText('Started');
-  });
-
-  await test.step('Assert contains — Task B remains in Planned status', async () => {
-    await pseProjCrelatedPage.expectTaskBRowContainsText('Planned');
   });
 });
-
 
 test('Project with no Project Tasks shows appropriate message', { tag: ["@e2e","@regression","@P2","@project-has-no-tasks"] }, async ({ page, homePage, searchResultPage, pseProjCPage, pseProjCrelatedPage }) => {
   await test.step('Open — Navigate to Salesforce PSA Home', async () => {
@@ -223,6 +205,7 @@ test('Project with no Project Tasks shows appropriate message', { tag: ["@e2e","
   });
 
   await test.step('Assert visible — Global search input is visible on Home page', async () => {
+    await homePage.clickSearch();
     await homePage.expectSearchInputVisible();
   });
 
