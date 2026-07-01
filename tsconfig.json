@@ -7,7 +7,14 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "preserveSymlinks": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@support/*": ["./support/*"],
+      "@pageobjects/*": ["./pageobjects/*"],
+      "@testdata/*": ["./testdata/*"],
+      "@utils/*": ["./utils/*"]
+    }
   },
   "include": [
     "pageobjects/**/*.ts",
